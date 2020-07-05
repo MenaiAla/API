@@ -7,11 +7,10 @@ const countryData = require('./countries');
  * @returns  {Object} 		transformed object
  */
 const transformNull = (object) => {
-	if (typeof object !== 'object') {
-		return object;
+	if (typeof object === 'object') {
+		Object.entries(object).forEach((entry) => entry[0] !== 'countryInfo' && (object[entry[0]] = entry[1] === null ? 0 : transformNull(entry[1])));
 	}
 	// eslint-disable-next-line no-return-assign
-	Object.entries(object).forEach((entry) => entry[0] !== 'countryInfo' && (object[entry[0]] = entry[1] === null ? 0 : transformNull(entry[1])));
 	return object;
 };
 
