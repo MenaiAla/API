@@ -3,10 +3,12 @@ const countryData = require('./countries');
 
 
 const transformNull = (object) => {
+
+	const COUNTRY_INFO = "countryInfo";
+
 	if (typeof object === 'object') {
-		Object.entries(object).forEach((entry) => entry[0] !== 'countryInfo' && (object[entry[0]] = entry[1] === null ? 0 : transformNull(entry[1])));
+		Object.entries(object).forEach((entry) => entry[0] !== COUNTRY_INFO && (object[entry[0]] = entry[1] === null ? 0 : transformNull(entry[1])));
 	}
-	// eslint-disable-next-line no-return-assign
 	return object;
 };
 
@@ -18,7 +20,7 @@ const getCountryName = (countryCode) => countryData.find(country => country.iso2
 
 const getCountryData = (countryNameParam) => {
 	const countryName = stringUtils.wordsStandardize(countryNameParam);
-	const nullReturn = { _id: null, country: null, iso2: null, iso3: null, lat: 0, long: 0, flag: 'https://disease.sh/assets/img/flags/unknown.png' };
+	const NULL = { _id: null, country: null, iso2: null, iso3: null, lat: 0, long: 0, flag: 'https://disease.sh/assets/img/flags/unknown.png' };
 	const countryFound = countryData.find(item => (stringUtils.wordsStandardize(item.country) === countryName
 		|| stringUtils.wordsStandardize(item.iso2) === countryName
 		|| stringUtils.wordsStandardize(item.iso3) === countryName
@@ -33,7 +35,7 @@ const getCountryData = (countryNameParam) => {
 		lat: countryFound.lat,
 		long: countryFound.long,
 		flag: `https://disease.sh/assets/img/flags/${countryFound.iso2.toLowerCase()}.png`
-	} : nullReturn;
+	} : NULL;
 };
 
 
