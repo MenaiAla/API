@@ -54,9 +54,8 @@ const getWorldometersData = (data, nameParam, strictMatching, continentMode) => 
 		: strictMatching ? stringUtils.wordsStandardize(ctry[selector]) === standardizedName : fuzzySearch(ctry, nameParam, standardizedName, selector));
 };
 
-const countryExceptions = ['UK', 'UAE', 'DR'];
 
-const isCountryException = (countryname) => !!countryExceptions.find(exception => stringUtils.wordsStandardize(countryname) === stringUtils.wordsStandardize(exception));
+const isCountryException = (countryname, countryExceptions = ['UK', 'UAE', 'DR']) => !!countryExceptions.find(exception => stringUtils.wordsStandardize(countryname) === stringUtils.wordsStandardize(exception));
 
 
 const getCountriesFromContinent = (continent, countries) => countries
