@@ -77,7 +77,7 @@ const fuzzySearch = (ctry, nameParam, standardizedName, selector) => ((ctry.coun
  */
 const getWorldometersData = (data, nameParam, strictMatching, continentMode) => {
 	const selector = continentMode ? 'continent' : 'country';
-	const isText = isNaN(nameParam);
+	const isText = Number.isNaN(nameParam);
 	const countryInfo = isText ? getCountryData(nameParam) : {};
 	const standardizedName = stringUtils.wordsStandardize(countryInfo.country ? countryInfo.country : nameParam);
 	return data.find((ctry) => !isText ? ctry.countryInfo && ctry.countryInfo._id === Number(nameParam)
